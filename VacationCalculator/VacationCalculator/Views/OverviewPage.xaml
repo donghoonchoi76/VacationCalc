@@ -18,7 +18,7 @@
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="16,40,16,40">
                 <Label FontSize="22" HorizontalOptions="Center" Text="You have" />
-                <Label FontSize="24" HorizontalOptions="Center" Text="{Binding CurrentDays}" FontAttributes="Bold" TextColor="Blue" />
+                <Label FontSize="64" HorizontalOptions="Center" Text="{Binding CurrentDays}" FontAttributes="Bold" TextColor="Blue" />
                 <Label FontSize="22" HorizontalOptions="Center" Text="vacation days now," />
                 <Label FontSize="22" HorizontalOptions="Center">
                     <Label.FormattedText>

@@ -14,10 +14,10 @@
     
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
-            <Label Text="Date" FontSize="Medium" />
-            <Entry Text="{Binding Item.Date}" d:Text="Item name" FontSize="Small" Placeholder="Enter vacation date."/>
+            <Label Text="Date" FontSize="Medium" />            
+            <DatePicker Date="{Binding Date}" FontSize="Small" />
             <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding Item.Description}" d:Text="Vacation description" FontSize="Small" Margin="0" Placeholder="Enter vacation description." />
+            <Editor Text="{Binding Description}" d:Text="Vacation description" FontSize="Small" Margin="0" Placeholder="Enter vacation description." />
         </StackLayout>
     </ContentPage.Content>
     

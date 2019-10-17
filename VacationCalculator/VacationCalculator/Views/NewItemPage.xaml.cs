@@ -12,26 +12,27 @@ namespace VacationCalculator.Views
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class NewItemPage : ContentPage
-    {
-        public Item Item { get; set; }
-
+    {   
         public NewItemPage()
         {
             InitializeComponent();
-
-            Item = new Item
-            {
-                Id = Guid.NewGuid().ToString(),
-                Date = DateTime.Now.ToLongDateString(),
-                Description = string.Empty
-            };
-
             BindingContext = this;
         }
 
+        public DateTime Date { get; set; } = DateTime.Now;
+
+        public string Description { get; set; }
+
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            Item item = new Item
+            {
+                Id = Guid.NewGuid().ToString(),
+                Date = Date.ToLongDateString(),
+                Description = Description
+            };
+
+            MessagingCenter.Send(this, "AddItem", item);
             await Navigation.PopModalAsync();
         }
 

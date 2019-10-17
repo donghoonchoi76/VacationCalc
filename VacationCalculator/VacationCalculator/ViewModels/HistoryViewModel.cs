@@ -15,7 +15,6 @@ namespace VacationCalculator.ViewModels
     {
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-
         public static int TotalVacations { get; set; }
 
         public HistoryViewModel()
@@ -27,7 +26,6 @@ namespace VacationCalculator.ViewModels
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item as Item;
-
                 if (Items.Where((Item arg) => arg.Date == newItem.Date).Count() > 0)
                     return;
 
