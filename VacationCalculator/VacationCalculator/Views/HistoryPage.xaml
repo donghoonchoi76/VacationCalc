@@ -13,6 +13,7 @@
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" Clicked="DeleteItem_Clicked" />
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>    
     <ContentPage.Content>

@@ -32,6 +32,11 @@ namespace VacationCalculator.ViewModels
                 Items.Add(newItem);
                 await DataStore.AddItemAsync(newItem);
             });
+
+            MessagingCenter.Subscribe<HistoryPage, string>(this, "DeleteItem", async (obj, id) =>
+            {
+                await DataStore.DeleteItemAsync(id);
+            });
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -39,7 +44,7 @@ namespace VacationCalculator.ViewModels
             if (IsBusy)
                 return;
 
-            IsBusy = true;
+            IsBusy = false;
 
             try
             {
