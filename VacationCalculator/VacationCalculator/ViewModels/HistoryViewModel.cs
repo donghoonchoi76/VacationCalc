@@ -13,6 +13,8 @@ namespace VacationCalculator.ViewModels
 {
     public class HistoryViewModel : BaseViewModel
     {
+        bool isLoading = false;
+
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public static int TotalVacations { get; set; }
@@ -41,11 +43,12 @@ namespace VacationCalculator.ViewModels
 
         async Task ExecuteLoadItemsCommand()
         {
-            if (IsBusy)
+            if (isLoading)
                 return;
 
-            IsBusy = false;
-
+            IsBusy = true;
+            isLoading = true;
+            
             try
             {
                 Items.Clear();
@@ -61,6 +64,7 @@ namespace VacationCalculator.ViewModels
             }
             finally
             {
+                isLoading = false;
                 IsBusy = false;
             }
         }
