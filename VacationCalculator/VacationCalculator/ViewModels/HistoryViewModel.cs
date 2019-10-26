@@ -13,8 +13,6 @@ namespace VacationCalculator.ViewModels
 {
     public class HistoryViewModel : BaseViewModel
     {
-        bool isLoading = false;
-
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public static int TotalVacations { get; set; }
@@ -23,7 +21,11 @@ namespace VacationCalculator.ViewModels
         {
             Title = "History";
             Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadItemsCommand = new Command(async () => {
+                Debug.WriteLine("!!!!!!!!!!!!! Enter LoadItems");
+                await ExecuteLoadItemsCommand();
+                Debug.WriteLine("!!!!!!!!!!!!! Finished LoadItems");
+            }); 
 
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             {
@@ -43,12 +45,13 @@ namespace VacationCalculator.ViewModels
 
         async Task ExecuteLoadItemsCommand()
         {
-            if (isLoading)
+            if (IsBusy)
+            {
+                Debug.WriteLine("!!!!!!!!!!!!! Is Busy");
                 return;
+            }   
 
             IsBusy = true;
-            isLoading = true;
-            
             try
             {
                 Items.Clear();
@@ -60,11 +63,10 @@ namespace VacationCalculator.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Debug.WriteLine(ex.Message);
             }
             finally
             {
-                isLoading = false;
                 IsBusy = false;
             }
         }

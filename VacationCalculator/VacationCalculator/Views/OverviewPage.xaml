@@ -26,14 +26,14 @@
                             <FormattedString.Spans>
                                 <Span Text="and"/>
                                 <Span Text=" " />
-                                <Span Text="{Binding OneMoreDays}" FontSize="24" FontAttributes="Bold" TextColor="Red"/>
+                                <Span Text="{Binding NextDays}" FontSize="24" FontAttributes="Bold" TextColor="Red"/>
                                 <Span Text=" " />
                                 <Span Text="days on"/>
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Label FontSize="24" HorizontalOptions="Center" Text="{Binding OneMoreDaysDate}" FontAttributes="Bold" TextColor="Red"/>
+                <Label FontSize="24" HorizontalOptions="Center" Text="{Binding NextDaysDate}" FontAttributes="Bold" TextColor="Red"/>
             </StackLayout>
         </ScrollView>
     </Grid>

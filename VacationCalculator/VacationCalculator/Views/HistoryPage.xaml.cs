@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using VacationCalculator.Models;
 using VacationCalculator.Views;
 using VacationCalculator.ViewModels;
+using System.Diagnostics;
 
 namespace VacationCalculator.Views
 {
@@ -47,9 +48,8 @@ namespace VacationCalculator.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if ((BindingContext as HistoryViewModel).Items.Count == 0)
-                (BindingContext as HistoryViewModel).LoadItemsCommand.Execute(null);
+            Debug.WriteLine("!!!!!!!!!!!!! OnAppearing");
+            (BindingContext as HistoryViewModel).LoadItemsCommand.Execute(null);
         }
     }
 }

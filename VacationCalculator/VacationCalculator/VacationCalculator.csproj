@@ -1,8 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <AssemblyName>VacationCalculator</AssemblyName>
+    <Product>Vacation Calculator</Product>
+    <Company>luckylinus</Company>
+    <Authors>luckylinus</Authors>
+    <PackageId>VacationCalculator</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
