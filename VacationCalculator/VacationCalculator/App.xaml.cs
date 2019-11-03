@@ -13,7 +13,8 @@ namespace VacationCalculator
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<DataStore>();
+            DependencyService.Register<SettingParamsStore>();
             MainPage = new MainPage();
         }
 

@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,47 +9,102 @@ using VacationCalculator.Models;
 
 namespace VacationCalculator.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class DataStore : IDataStore<Item>
     {
-        readonly SQLiteAsyncConnection _database;
-
-        public MockDataStore()
+        public DataStore()
         {
-            _database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "vacation.db3"));
-            _database.CreateTableAsync<Item>().Wait();
+            AsyncDBConnection.DB.CreateTableAsync<Item>().Wait();
         }
 
         public int ItemCount
         {
             get
             {
-                return _database.Table<Item>().CountAsync().Result;
+                return AsyncDBConnection.DB.Table<Item>().CountAsync().Result;
             }
         }
 
-        public async Task<int> AddItemAsync(Item item)
+        public int SetItem(Item item)
         {
-            return await _database.InsertOrReplaceAsync(item);
+            return AsyncDBConnection.DB.InsertOrReplaceAsync(item).Result;
         }
 
-        public async Task<int> UpdateItemAsync(Item item)
+        public int DeleteItem(string id)
         {
-            return await _database.InsertOrReplaceAsync(item);
+            if (HasItem(id))
+                return AsyncDBConnection.DB.DeleteAsync<Item>(id).Result;
+
+            return -1;
         }
 
-        public async Task<int> DeleteItemAsync(string id)
+        public Item GetItem(string id)
         {
-            return await _database.DeleteAsync<Item>(id);
+            if (HasItem(id))
+                return AsyncDBConnection.DB.FindAsync<Item>(id).Result;
+
+            return null;
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public bool HasItem(string id)
         {
-            return await _database.FindAsync<Item>(id);
+            int num = AsyncDBConnection.DB.Table<Item>().Where(x => x.Id == id).CountAsync().Result;
+            return (num > 0);
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public IEnumerable<Item> GetItems(bool forceRefresh = false)
         {
-            return await _database.Table<Item>().ToListAsync();
+            return AsyncDBConnection.DB.Table<Item>().ToListAsync().Result;
+        }
+    }
+
+    public class SettingParamsStore : IDataStore<SettingItem>
+    {
+        public SettingParamsStore()
+        {   
+            AsyncDBConnection.DB.CreateTableAsync<SettingItem>().Wait();
+        }
+
+        public int ItemCount
+        {
+            get
+            {
+                return AsyncDBConnection.DB.Table<SettingItem>().CountAsync().Result;
+            }
+        }
+
+        public int SetItem(SettingItem item)
+        {
+            return AsyncDBConnection.DB.InsertOrReplaceAsync(item).Result;
+        }
+
+        public int DeleteItem(string id)
+        {
+            if (HasItem(id))
+                return AsyncDBConnection.DB.DeleteAsync<SettingItem>(id).Result;
+
+            return -1;
+        }
+
+        public SettingItem GetItem(string id)
+        {
+            if(HasItem(id))
+            {
+                return AsyncDBConnection.DB.FindAsync<SettingItem>(id).Result;
+            }
+
+            return null;
+        }
+
+        public bool HasItem(string id)
+        {
+            Debug.WriteLine("HasItem");
+            int num = AsyncDBConnection.DB.Table<SettingItem>().Where(x => x.Id == id).CountAsync().Result;
+            return (num > 0);
+        }
+
+        public IEnumerable<SettingItem> GetItems(bool forceRefresh = false)
+        {
+            return AsyncDBConnection.DB.Table<SettingItem>().ToListAsync().Result;
         }
     }
 }

@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VacationCalculator.ViewModels;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
+using VacationCalculator.Models;
 
 namespace VacationCalculator.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OverviewPage : ContentPage
+    public partial class SettingsPage : ContentPage
     {
-        public OverviewPage()
+        public SettingsPage()
         {
             InitializeComponent();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            (BindingContext as OverviewViewModel).Refresh();
         }
     }
 }

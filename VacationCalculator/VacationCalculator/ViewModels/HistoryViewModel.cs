@@ -19,35 +19,33 @@ namespace VacationCalculator.ViewModels
 
         public HistoryViewModel()
         {
-            Title = "History";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => {
                 Debug.WriteLine("!!!!!!!!!!!!! Enter LoadItems");
-                await ExecuteLoadItemsCommand();
+                ExecuteLoadItemsCommand();
                 Debug.WriteLine("!!!!!!!!!!!!! Finished LoadItems");
             }); 
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", (obj, item) =>
             {
                 var newItem = item as Item;
                 if (Items.Where((Item arg) => arg.Date == newItem.Date).Count() > 0)
                     return;
 
                 Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
+                DataStore.SetItem(newItem);
             });
 
-            MessagingCenter.Subscribe<HistoryPage, string>(this, "DeleteItem", async (obj, id) =>
+            MessagingCenter.Subscribe<HistoryPage, string>(this, "DeleteItem", (obj, id) =>
             {
-                await DataStore.DeleteItemAsync(id);
+                DataStore.DeleteItem(id);
             });
         }
 
-        async Task ExecuteLoadItemsCommand()
+        void ExecuteLoadItemsCommand()
         {
             if (IsBusy)
             {
-                Debug.WriteLine("!!!!!!!!!!!!! Is Busy");
                 return;
             }   
 
@@ -55,7 +53,7 @@ namespace VacationCalculator.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = DataStore.GetItems(true);
                 foreach (var item in items)
                 {
                     Items.Add(item);

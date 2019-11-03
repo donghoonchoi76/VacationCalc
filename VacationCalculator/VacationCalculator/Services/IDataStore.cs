@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace VacationCalculator.Services
@@ -8,10 +10,32 @@ namespace VacationCalculator.Services
     {
         int ItemCount { get; }
 
-        Task<int> AddItemAsync(T item);
-        Task<int> UpdateItemAsync(T item);
-        Task<int> DeleteItemAsync(string id);
-        Task<T> GetItemAsync(string id);
-        Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
+        int SetItem(T item);
+        int DeleteItem(string id);
+        T GetItem(string id);
+        IEnumerable<T> GetItems(bool forceRefresh = false);
+    }
+
+    public sealed class AsyncDBConnection
+    {
+        readonly SQLiteAsyncConnection _database;
+        private static AsyncDBConnection instance = null;
+
+        private AsyncDBConnection()
+        {
+            _database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "vacation.db3"));
+        }
+        
+        public static SQLiteAsyncConnection DB
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AsyncDBConnection();
+                }
+                return instance._database;
+            }
+        }
     }
 }

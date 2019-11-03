@@ -13,6 +13,7 @@ namespace VacationCalculator.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<SettingItem> SettingParamsStore => DependencyService.Get<IDataStore<SettingItem>>();
 
         bool isBusy = false;
         public bool IsBusy
@@ -21,7 +22,7 @@ namespace VacationCalculator.ViewModels
             set { SetProperty(ref isBusy, value); }
         }
 
-        string title = string.Empty;
+        string title = "Vacation Counter";
         public string Title
         {
             get { return title; }
