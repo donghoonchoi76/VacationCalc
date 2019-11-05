@@ -25,8 +25,7 @@
                 RefreshCommand="{Binding LoadItemsCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                CachingStrategy="RecycleElement"
-                
+                CachingStrategy="RecycleElement"                
                 ItemSelected="OnItemSelected">
                 <d:ListView.ItemsSource>
                     <x:Array Type="{x:Type x:String}" />

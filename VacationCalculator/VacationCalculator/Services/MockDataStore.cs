@@ -47,7 +47,7 @@ namespace VacationCalculator.Services
 
         public bool HasItem(string id)
         {
-            int num = AsyncDBConnection.DB.Table<Item>().Where(x => x.Id == id).CountAsync().Result;
+            int num = AsyncDBConnection.DB.Table<Item>().Where(x => x.Date == id).CountAsync().Result;
             return (num > 0);
         }
 

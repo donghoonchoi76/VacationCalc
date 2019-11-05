@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using VacationCalculator.Models;
+using VacationCalculator.ViewModels;
 
 namespace VacationCalculator.Views
 {
@@ -16,23 +17,12 @@ namespace VacationCalculator.Views
         public NewItemPage()
         {
             InitializeComponent();
-            BindingContext = this;
         }
-
-        public DateTime Date { get; set; } = DateTime.Now;
-
-        public string Description { get; set; }
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            Item item = new Item
-            {
-                Id = Guid.NewGuid().ToString(),
-                Date = Date.ToLongDateString(),
-                Description = Description
-            };
-
-            MessagingCenter.Send(this, "AddItem", item);
+            (BindingContext as NewItemViewModel).Save();
+                        
             await Navigation.PopModalAsync();
         }
 

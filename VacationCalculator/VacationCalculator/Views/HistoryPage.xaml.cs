@@ -36,7 +36,7 @@ namespace VacationCalculator.Views
         {
             if(ItemsListView.SelectedItem is Item item)
             {
-                MessagingCenter.Send(this, "DeleteItem", item.Id);
+                MessagingCenter.Send(this, "DeleteItem", item.Date);
             }                
         }
 
@@ -48,7 +48,6 @@ namespace VacationCalculator.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            Debug.WriteLine("!!!!!!!!!!!!! OnAppearing");
             (BindingContext as HistoryViewModel).LoadItemsCommand.Execute(null);
         }
     }

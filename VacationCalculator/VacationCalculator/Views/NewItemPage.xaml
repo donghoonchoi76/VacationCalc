@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:VacationCalculator.ViewModels"
              mc:Ignorable="d"
              x:Class="VacationCalculator.Views.NewItemPage"
              Title="New Date">
-    
+
+    <ContentPage.BindingContext>
+        <vm:NewItemViewModel />
+    </ContentPage.BindingContext>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
@@ -14,8 +19,10 @@
     
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
-            <Label Text="Date" FontSize="Medium" />            
-            <DatePicker Date="{Binding Date}" FontSize="Small" />
+            <Label Text="Start Date" FontSize="Medium" />            
+            <DatePicker Date="{Binding StartDate}" FontSize="Small" />
+            <Label Text="End Date" FontSize="Medium" />
+            <DatePicker Date="{Binding EndDate}" FontSize="Small" />
             <Label Text="Description" FontSize="Medium" />
             <Editor Text="{Binding Description}" d:Text="Vacation description" FontSize="Small" Margin="0" Placeholder="Enter vacation description." />
         </StackLayout>

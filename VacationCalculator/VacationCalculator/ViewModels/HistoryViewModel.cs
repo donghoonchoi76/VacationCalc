@@ -20,10 +20,8 @@ namespace VacationCalculator.ViewModels
         public HistoryViewModel()
         {
             Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => {
-                Debug.WriteLine("!!!!!!!!!!!!! Enter LoadItems");
+            LoadItemsCommand = new Command(() => {                
                 ExecuteLoadItemsCommand();
-                Debug.WriteLine("!!!!!!!!!!!!! Finished LoadItems");
             }); 
 
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", (obj, item) =>
@@ -34,11 +32,18 @@ namespace VacationCalculator.ViewModels
 
                 Items.Add(newItem);
                 DataStore.SetItem(newItem);
+                ExecuteLoadItemsCommand();
             });
 
             MessagingCenter.Subscribe<HistoryPage, string>(this, "DeleteItem", (obj, id) =>
             {
+                Item item = DataStore.GetItem(id);
+                if (item != null)
+                {
+                    Items.Remove(item);                    
+                }                    
                 DataStore.DeleteItem(id);
+                ExecuteLoadItemsCommand();
             });
         }
 
