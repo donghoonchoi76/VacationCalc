@@ -97,7 +97,6 @@ namespace VacationCalculator.Services
 
         public bool HasItem(string id)
         {
-            Debug.WriteLine("HasItem");
             int num = AsyncDBConnection.DB.Table<SettingItem>().Where(x => x.Id == id).CountAsync().Result;
             return (num > 0);
         }

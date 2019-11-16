@@ -76,5 +76,14 @@ namespace VacationCalculator.ViewModels
                 SetProperty(ref percentOfPay, value);                    
             }
         }
+
+        public bool HasData()
+        {
+            SettingItem item = SettingParamsStore.GetItem(SettingItems.PercentOfPay.ToString());
+            if (item != null && int.TryParse(item.Value, out int v) && v != 0)
+                return true;
+
+            return false;
+        }
     }
 }

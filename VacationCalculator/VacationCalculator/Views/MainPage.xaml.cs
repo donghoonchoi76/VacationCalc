@@ -13,6 +13,16 @@ namespace VacationCalculator.Views
         public MainPage()
         {
             InitializeComponent();
+
+            foreach (NavigationPage page in this.Children)
+            {
+                if(page.CurrentPage is SettingsPage settingPage)
+                {
+                    if(!settingPage.HasData())
+                        this.CurrentPage = page;
+                    break;
+                }
+            }
         }
     }
 }

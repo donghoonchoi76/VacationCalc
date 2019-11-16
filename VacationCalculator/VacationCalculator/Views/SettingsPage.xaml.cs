@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using VacationCalculator.ViewModels;
 using VacationCalculator.Models;
 
 namespace VacationCalculator.Views
@@ -17,6 +17,11 @@ namespace VacationCalculator.Views
         public SettingsPage()
         {
             InitializeComponent();
+        }
+
+        public bool HasData()
+        {   
+            return (BindingContext as SettingsViewModel).HasData();
         }
     }
 }

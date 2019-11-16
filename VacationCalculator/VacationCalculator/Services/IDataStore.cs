@@ -14,6 +14,7 @@ namespace VacationCalculator.Services
         int DeleteItem(string id);
         T GetItem(string id);
         IEnumerable<T> GetItems(bool forceRefresh = false);
+        bool HasItem(string id);
     }
 
     public sealed class AsyncDBConnection
