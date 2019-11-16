@@ -13,13 +13,29 @@
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
+        <StackLayout Spacing="1" Padding="15">
             <Label Text="Beginning Date" FontSize="Medium" />
-            <DatePicker Date="{Binding BeginningDate}" FontSize="Small" />
-            <Label Text="Initial Vacation Days" FontSize="Medium" />
-            <Editor Text="{Binding InitialDays}" d:Text="Vacation description" Keyboard="Numeric" FontSize="Small" Margin="0" />
+            <DatePicker Format="D" Date="{Binding BeginningDate}" Margin="10,0,0,0" FontSize="Large" HorizontalOptions="Fill" />
+            
+            <Label Text="Initial Vacation Days" FontSize="Medium" />            
+            <Grid HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" HorizontalTextAlignment="Start" Text="{Binding InitialDays}" d:Text="Initial vacation days" Keyboard="Numeric" FontSize="Large" Margin="10,0,0,0" />
+                <Label Grid.Column="1" VerticalTextAlignment="Center" Text="Days" FontSize="Large" />
+            </Grid>
+            
             <Label Text="Percent of Vacation Pay" FontSize="Medium" />
-            <Editor Text="{Binding PercentOfPay}" d:Text="Vacation description" Keyboard="Numeric" FontSize="Small" Margin="0" />
+            <Grid HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" HorizontalTextAlignment="Start" Text="{Binding PercentOfPay}" d:Text="Vacation pay percent" Keyboard="Numeric" FontSize="Large" Margin="10,0,0,0" />
+                <Label Grid.Column="1" VerticalTextAlignment="Center" Text="%" FontSize="Large" />
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

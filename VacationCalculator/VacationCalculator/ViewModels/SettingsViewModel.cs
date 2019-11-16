@@ -28,8 +28,8 @@ namespace VacationCalculator.ViewModels
                 if (item != null)
                     DateTime.TryParse(item.Value, out beginingDate);
 
-                if (SetProperty(ref beginingDate, value))
-                    SettingParamsStore.SetItem(new SettingItem(SettingItems.BeginningDate.ToString(), beginingDate.ToString()));
+                SettingParamsStore.SetItem(new SettingItem(SettingItems.BeginningDate.ToString(), value.ToLongDateString()));
+                SetProperty(ref beginingDate, value);
             }
         }
 
@@ -50,8 +50,8 @@ namespace VacationCalculator.ViewModels
                 if (item != null)
                     int.TryParse(item.Value, out initialDays);
 
-                if(SetProperty(ref initialDays, value))
-                    SettingParamsStore.SetItem(new SettingItem(SettingItems.InitialDays.ToString(), initialDays.ToString()));
+                SettingParamsStore.SetItem(new SettingItem(SettingItems.InitialDays.ToString(), value.ToString()));
+                SetProperty(ref initialDays, value);
             }
         }
 
@@ -72,8 +72,8 @@ namespace VacationCalculator.ViewModels
                 if (item != null)
                     int.TryParse(item.Value, out percentOfPay);
 
-                if (SetProperty(ref percentOfPay, value))
-                    SettingParamsStore.SetItem(new SettingItem(SettingItems.PercentOfPay.ToString(), percentOfPay.ToString()));
+                SettingParamsStore.SetItem(new SettingItem(SettingItems.PercentOfPay.ToString(), value.ToString()));
+                SetProperty(ref percentOfPay, value);                    
             }
         }
     }
